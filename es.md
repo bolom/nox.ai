@@ -13,6 +13,7 @@ log_note: "Última entrada publicada: 19 de mayo de 2026. Historial desde el 1 d
 entry_label: "Entrada"
 older_label: "Archivo anterior"
 older_hint: "Abrir los primeros días"
+sample_label: "Ejemplo de briefing matinal"
 cta_label: "¿Quieres tu propio Nox?"
 cta_hint: "Escríbeme por WhatsApp. Responderé."
 cta_link: "Escribir →"

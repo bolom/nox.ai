@@ -280,6 +280,59 @@
       line-height: 1.6;
     }
 
+    /* ── Briefing sample card ── */
+    .briefing-card {
+      background: #1a1c1a;
+      color: #d8dbd8;
+      padding: 24px 22px 20px;
+      font-size: 13px;
+      line-height: 1.7;
+      font-family: var(--sans);
+    }
+
+    .b-header {
+      font-size: 12px;
+      font-family: var(--mono);
+      letter-spacing: .03em;
+      color: #7a9e88;
+      margin-bottom: 18px;
+    }
+
+    .b-item {
+      margin-bottom: 14px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+
+    .b-item:last-of-type {
+      border-bottom: none;
+      margin-bottom: 10px;
+      padding-bottom: 0;
+    }
+
+    .b-title {
+      font-weight: 500;
+      color: #f0f0ee;
+      margin-bottom: 4px;
+      font-size: 13px;
+    }
+
+    .b-body {
+      color: #8a8e8a;
+      font-size: 12.5px;
+      line-height: 1.7;
+      padding-left: 4px;
+    }
+
+    .b-footer {
+      font-size: 12px;
+      color: #6a6e6a;
+      font-family: var(--mono);
+      letter-spacing: .02em;
+      padding-top: 6px;
+      border-top: 1px solid rgba(255,255,255,.07);
+    }
+
     /* ── WhatsApp CTA ── */
     .cta-block {
       display: flex;
@@ -472,6 +525,73 @@
         </div>
       </div>
     </section>
+
+    <!-- Briefing sample -->
+    <div class="section-rule" style="margin-top: 32px;">
+      <span class="label">{{ page.sample_label }}</span>
+      <span class="rule-line"></span>
+    </div>
+
+    <div class="briefing-card">
+      {% if page.lang == 'en' %}
+      <p class="b-header">🌅 Briefing — Wednesday 20 May, 9:55am</p>
+      <div class="b-item">
+        <p class="b-title">🔴 Now — Meeting at 10:00am</p>
+        <p class="b-body">In ~5 min. No prep or location noted. Check context if needed.</p>
+      </div>
+      <div class="b-item">
+        <p class="b-title">🔴 Awaiting replies</p>
+        <p class="b-body">· Contact A — project status update (yesterday)<br>· Contact B — file deliverables (ideally this week)</p>
+      </div>
+      <div class="b-item">
+        <p class="b-title">🟡 Schedule conflict tomorrow 1–2pm</p>
+        <p class="b-body">· Meeting A vs Meeting B. One needs to move.</p>
+      </div>
+      <div class="b-item">
+        <p class="b-title">🟡 Supplier payment</p>
+        <p class="b-body">· Document updated this morning<br>· Invoice confirmed with priority ✅<br>· Nothing to do — but keep tracking</p>
+      </div>
+      <p class="b-footer">💬 WhatsApp — All clear, non-urgent messages handled</p>
+      {% elsif page.lang == 'es' %}
+      <p class="b-header">🌅 Briefing — miércoles 20 mayo, 9:55</p>
+      <div class="b-item">
+        <p class="b-title">🔴 Ahora — Reunión a las 10:00</p>
+        <p class="b-body">En ~5 min. Sin preparación ni lugar anotado.</p>
+      </div>
+      <div class="b-item">
+        <p class="b-title">🔴 Respuestas pendientes</p>
+        <p class="b-body">· Contacto A — avance de proyecto (ayer)<br>· Contacto B — entregables expediente (idealmente esta semana)</p>
+      </div>
+      <div class="b-item">
+        <p class="b-title">🟡 Conflicto de agenda mañana 13-14h</p>
+        <p class="b-body">· Reunión A vs Reunión B. Hay que desplazar una.</p>
+      </div>
+      <div class="b-item">
+        <p class="b-title">🟡 Pago proveedor</p>
+        <p class="b-body">· Documento actualizado esta mañana<br>· Factura confirmada con prioridad ✅<br>· Nada que hacer — pero seguir</p>
+      </div>
+      <p class="b-footer">💬 WhatsApp — Sin novedad, mensajes no urgentes gestionados</p>
+      {% else %}
+      <p class="b-header">🌅 Briefing — mercredi 20 mai, 9h55</p>
+      <div class="b-item">
+        <p class="b-title">🔴 Maintenant — RDV 10h00</p>
+        <p class="b-body">Dans ~5 min. Aucune préparation ni lieu noté. Vérifier le contexte si besoin.</p>
+      </div>
+      <div class="b-item">
+        <p class="b-title">🔴 Réponses attendues</p>
+        <p class="b-body">· Contact A — point avancement projet (hier)<br>· Contact B — livrables dossier (réponse cette semaine idéalement)</p>
+      </div>
+      <div class="b-item">
+        <p class="b-title">🟡 Conflit agenda demain 13h-14h</p>
+        <p class="b-body">· Réunion A vs Réunion B. À décaler.</p>
+      </div>
+      <div class="b-item">
+        <p class="b-title">🟡 Paiement fournisseur</p>
+        <p class="b-body">· Document mis à jour ce matin<br>· Facture confirmée avec priorité ✅<br>· Rien à faire — mais surveiller</p>
+      </div>
+      <p class="b-footer">💬 WhatsApp — RAS, messages non urgents traités</p>
+      {% endif %}
+    </div>
 
     <!-- CTA WhatsApp -->
     <a class="cta-block"
