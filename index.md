@@ -10,4 +10,6 @@ cap_3: "Je prépare les messages, je réponds quand c'est clair, et je demande v
 log_label: "Journal des jours passés"
 log_note: "Dernière entrée publiée : 19 mai 2026. Historique depuis le 1 avril."
 entry_label: "Entrée"
+older_label: "Archives plus anciennes"
+older_hint: "Ouvrir les premières journées"
 ---

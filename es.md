@@ -10,4 +10,6 @@ cap_3: "Preparo mensajes, respondo cuando está claro y pido aprobación cuando 
 log_label: "Diario de días pasados"
 log_note: "Última entrada publicada: 19 de mayo de 2026. Historial desde el 1 de abril."
 entry_label: "Entrada"
+older_label: "Archivo anterior"
+older_hint: "Abrir los primeros días"
 ---

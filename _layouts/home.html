@@ -173,6 +173,30 @@
       gap: 0;
     }
 
+    .timeline-feature {
+      padding: 0 0 24px;
+      margin-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .timeline-feature .timeline-date {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    .timeline-feature .timeline-title {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .timeline-feature .timeline-text { font-size: 15px; }
+
+    .timeline-list {
+      display: flex;
+      flex-direction: column;
+    }
+
     .timeline-entry {
       display: grid;
       grid-template-columns: minmax(112px, 150px) 1fr;
@@ -182,6 +206,26 @@
     }
 
     .timeline-entry:first-child { border-top: none; padding-top: 0; }
+
+    .timeline-entry.is-hidden { display: none; }
+
+    .archive-toggle {
+      margin-top: 20px;
+      width: 100%;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--mid);
+      font: inherit;
+      font-size: 13px;
+      padding: 12px 14px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .archive-toggle:hover {
+      color: var(--text);
+      border-color: var(--muted);
+    }
 
     .timeline-date {
       font-family: var(--serif);
@@ -231,6 +275,7 @@
       .wrap { padding: 28px 18px 56px; }
       .lang-nav { margin-bottom: 44px; }
       .claim { font-size: 16px; }
+      .timeline-feature .timeline-date { font-size: 22px; }
       .timeline-entry { grid-template-columns: 1fr; gap: 8px; }
       footer { flex-direction: column; align-items: flex-start; gap: 4px; }
     }
@@ -271,9 +316,23 @@
 
       <p class="log-note">{{ page.log_note }}</p>
 
-      <div class="timeline">
-        {% for entry in site.data.logs %}
-          <article class="timeline-entry">
+      <div class="timeline" id="timeline">
+        {% assign featured = site.data.logs | first %}
+        <article class="timeline-feature">
+          <time class="timeline-date" datetime="{{ featured.date_iso }}">
+            {% if page.lang == 'en' %}{{ featured.date_en }}{% elsif page.lang == 'es' %}{{ featured.date_es }}{% else %}{{ featured.date_fr }}{% endif %}
+          </time>
+          <h2 class="timeline-title">
+            {% if page.lang == 'en' %}{{ featured.title_en }}{% elsif page.lang == 'es' %}{{ featured.title_es }}{% else %}{{ featured.title_fr }}{% endif %}
+          </h2>
+          <p class="timeline-text">
+            {% if page.lang == 'en' %}{{ featured.text_en }}{% elsif page.lang == 'es' %}{{ featured.text_es }}{% else %}{{ featured.text_fr }}{% endif %}
+          </p>
+        </article>
+
+        <div class="timeline-list">
+        {% for entry in site.data.logs offset:1 %}
+          <article class="timeline-entry{% if forloop.index > 9 %} is-hidden{% endif %}" data-archive-entry>
             <time class="timeline-date" datetime="{{ entry.date_iso }}">
               {% if page.lang == 'en' %}{{ entry.date_en }}{% elsif page.lang == 'es' %}{{ entry.date_es }}{% else %}{{ entry.date_fr }}{% endif %}
             </time>
@@ -287,6 +346,11 @@
             </div>
           </article>
         {% endfor %}
+        </div>
+
+        <button class="archive-toggle" type="button" data-archive-toggle>
+          {{ page.older_hint }}
+        </button>
       </div>
     </section>
 
@@ -308,5 +372,17 @@
     </footer>
 
   </div>
+  <script>
+    const toggle = document.querySelector('[data-archive-toggle]');
+    const hiddenEntries = [...document.querySelectorAll('[data-archive-entry].is-hidden')];
+    if (toggle && hiddenEntries.length) {
+      toggle.addEventListener('click', () => {
+        hiddenEntries.forEach(entry => entry.classList.remove('is-hidden'));
+        toggle.remove();
+      });
+    } else if (toggle) {
+      toggle.remove();
+    }
+  </script>
 </body>
 </html>

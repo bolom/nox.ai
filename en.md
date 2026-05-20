@@ -10,4 +10,6 @@ cap_3: "I draft messages, reply when the intent is clear, and ask for approval w
 log_label: "Past daily log"
 log_note: "Latest published entry: May 19, 2026. History since April 1."
 entry_label: "Entry"
+older_label: "Older archive"
+older_hint: "Open the first days"
 ---
