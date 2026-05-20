@@ -7,18 +7,20 @@
   {% I18n_Headers %}
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:     #f8f8f5;
-      --text:   #1c1c1a;
-      --mid:    #3a3e3a;
-      --muted:  #6a6e69;
-      --border: #deded8;
-      --serif:  "Instrument Serif", Georgia, serif;
-      --sans:   Inter, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      --bg:           #f7f7f4;
+      --text:         #18181a;
+      --mid:          #3c3f3c;
+      --muted:        #6b6f6a;
+      --border:       #e0e0da;
+      --accent:       #4a7c59;
+      --accent-dim:   rgba(74, 124, 89, 0.10);
+      --serif:        "Instrument Serif", Georgia, serif;
+      --sans:         "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
     }
 
     body {
@@ -36,234 +38,264 @@
     .wrap {
       max-width: 680px;
       margin: 0 auto;
-      padding: 40px 24px 72px;
+      padding: 40px 24px 80px;
     }
 
-    /* ── Language nav ── */
+    /* ── Top bar ── */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 72px;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      animation: breathe 2.8s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: .35; transform: scale(.85); }
+    }
+
     .lang-nav {
       display: flex;
-      gap: 18px;
-      justify-content: flex-end;
+      gap: 16px;
       font-size: 11px;
       letter-spacing: .12em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: 64px;
     }
+    .lang-nav a { transition: color .15s; }
     .lang-nav a:hover { color: var(--text); text-decoration: none; }
-    .lang-nav a[aria-current="true"] { color: var(--text); font-weight: 600; }
+    .lang-nav a[aria-current="true"] { color: var(--text); font-weight: 500; }
 
     /* ── Hero ── */
-    .hero { margin-bottom: 44px; }
+    .hero { margin-bottom: 56px; }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
 
     .brand-name {
       font-family: var(--serif);
       font-style: italic;
       font-weight: 400;
-      font-size: clamp(72px, 13vw, 112px);
-      line-height: .88;
+      font-size: clamp(80px, 14vw, 120px);
+      line-height: .86;
       color: var(--text);
-      letter-spacing: -.01em;
-      margin-bottom: 26px;
+      letter-spacing: -.015em;
+      margin-bottom: 28px;
     }
 
     .claim {
       font-size: 17px;
-      line-height: 1.6;
+      line-height: 1.65;
       color: var(--mid);
-      max-width: 500px;
-    }
-
-    .byline {
-      display: block;
-      margin-top: 14px;
-      font-size: 12px;
-      letter-spacing: .06em;
-      color: var(--muted);
+      max-width: 480px;
     }
 
     /* ── Divider ── */
     .rule {
       border: none;
       border-top: 1px solid var(--border);
-      margin: 38px 0;
+      margin: 44px 0;
     }
 
     /* ── Section label ── */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
     .label {
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: .12em;
       color: var(--muted);
-      margin-bottom: 20px;
+    }
+
+    .label-meta {
+      font-size: 12px;
+      color: var(--muted);
+      font-style: italic;
     }
 
     /* ── Capabilities ── */
     .cap-list { list-style: none; }
+
     .cap-list li {
       display: flex;
       align-items: baseline;
-      gap: 14px;
-      padding: 11px 0;
+      gap: 16px;
+      padding: 13px 0;
       border-bottom: 1px solid var(--border);
       color: var(--mid);
       font-size: 15px;
       line-height: 1.5;
     }
-    .cap-list li:last-child { border-bottom: none; padding-bottom: 0; }
-    .cap-list li::before {
-      content: "—";
-      color: var(--muted);
+
+    .cap-list li:first-child { border-top: 1px solid var(--border); }
+
+    .cap-num {
+      font-size: 10px;
+      letter-spacing: .06em;
+      color: var(--accent);
+      font-weight: 500;
+      min-width: 18px;
       flex-shrink: 0;
-      font-size: 12px;
+      padding-top: 1px;
     }
 
-    /* ── Daily log ── */
-    .log-header {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 28px;
-      flex-wrap: wrap;
+    /* ── Timeline ── */
+    .timeline { display: flex; flex-direction: column; }
+
+    /* Featured — latest entry */
+    .timeline-feature {
+      background: var(--accent-dim);
+      border-left: 2px solid var(--accent);
+      padding: 20px 20px 22px 22px;
+      margin-bottom: 4px;
     }
 
-    .log-date {
+    .timeline-feature .entry-date {
+      display: block;
       font-family: var(--serif);
       font-style: italic;
       font-size: 22px;
       color: var(--text);
-    }
-
-    .log-section { margin-bottom: 22px; }
-    .log-section:last-child { margin-bottom: 0; }
-
-    .log-section-title {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: .1em;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-
-    .log-section ul { list-style: none; }
-    .log-section li {
-      position: relative;
-      padding: 3px 0 3px 16px;
-      color: var(--mid);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-    .log-section li::before {
-      content: "·";
-      position: absolute;
-      left: 0;
-      color: var(--muted);
-    }
-
-    .log-note {
-      color: var(--muted);
-      font-size: 13px;
-      margin-top: -16px;
-      margin-bottom: 26px;
-    }
-
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .timeline-feature {
-      padding: 0 0 24px;
-      margin-bottom: 8px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .timeline-feature .timeline-date {
-      display: block;
-      margin-bottom: 10px;
-      font-size: 24px;
-    }
-
-    .timeline-feature .timeline-title {
-      font-size: 18px;
       margin-bottom: 6px;
-    }
-
-    .timeline-feature .timeline-text { font-size: 15px; }
-
-    .timeline-list {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .timeline-entry {
-      display: grid;
-      grid-template-columns: minmax(112px, 150px) 1fr;
-      gap: 24px;
-      padding: 20px 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .timeline-entry:first-child { border-top: none; padding-top: 0; }
-
-    .timeline-entry.is-hidden { display: none; }
-
-    .archive-toggle {
-      margin-top: 20px;
-      width: 100%;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--mid);
-      font: inherit;
-      font-size: 13px;
-      padding: 12px 14px;
-      cursor: pointer;
-      text-align: center;
-    }
-
-    .archive-toggle:hover {
-      color: var(--text);
-      border-color: var(--muted);
-    }
-
-    .timeline-date {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 20px;
-      color: var(--text);
       line-height: 1.2;
     }
 
-    .timeline-title {
+    .timeline-feature .entry-title {
+      font-size: 16px;
+      font-weight: 500;
       color: var(--text);
-      font-size: 15px;
-      margin-bottom: 4px;
+      margin-bottom: 8px;
+      line-height: 1.35;
     }
 
-    .timeline-text {
-      color: var(--mid);
+    .timeline-feature .entry-text {
       font-size: 14px;
+      color: var(--mid);
+      line-height: 1.65;
+    }
+
+    /* Archive list */
+    .timeline-list { display: flex; flex-direction: column; }
+
+    .timeline-entry {
+      display: grid;
+      grid-template-columns: minmax(110px, 140px) 1fr;
+      gap: 20px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .timeline-entry.is-hidden { display: none; }
+
+    .entry-date {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 18px;
+      color: var(--muted);
+      line-height: 1.2;
+      padding-top: 1px;
+    }
+
+    .entry-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 3px;
+      line-height: 1.35;
+    }
+
+    .entry-text {
+      font-size: 13px;
+      color: var(--mid);
       line-height: 1.6;
+    }
+
+    /* Archive toggle */
+    .archive-toggle {
+      border: none;
+      background: none;
+      color: var(--muted);
+      font: inherit;
+      font-size: 12px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 18px 0 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color .15s;
+    }
+
+    .archive-toggle:hover { color: var(--text); }
+
+    .archive-toggle::before {
+      content: "+";
+      font-size: 15px;
+      font-style: normal;
+      line-height: 1;
+      color: var(--accent);
     }
 
     /* ── Related projects ── */
     .projects {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px 22px;
+      gap: 4px 20px;
     }
-    .projects a { font-size: 13px; color: var(--muted); }
-    .projects a:hover { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); }
+
+    .projects a {
+      font-size: 13px;
+      color: var(--muted);
+      transition: color .15s;
+    }
+
+    .projects a:hover {
+      color: var(--text);
+      text-decoration: none;
+    }
+
     .projects span { font-size: 13px; color: var(--muted); }
 
     /* ── Footer ── */
     footer {
-      margin-top: 52px;
+      margin-top: 56px;
       border-top: 1px solid var(--border);
-      padding-top: 20px;
-      font-size: 12px;
+      padding-top: 18px;
+      font-size: 11px;
+      letter-spacing: .04em;
       color: var(--muted);
       display: flex;
       justify-content: space-between;
@@ -272,12 +304,18 @@
       gap: 8px;
     }
 
+    footer a { color: var(--muted); transition: color .15s; }
+    footer a:hover { color: var(--text); text-decoration: none; }
+
+    /* ── Responsive ── */
     @media (max-width: 560px) {
-      .wrap { padding: 28px 18px 56px; }
-      .lang-nav { margin-bottom: 44px; }
+      .wrap { padding: 28px 18px 60px; }
+      .top-bar { margin-bottom: 52px; }
+      .brand-name { margin-bottom: 24px; }
       .claim { font-size: 16px; }
-      .timeline-feature .timeline-date { font-size: 22px; }
-      .timeline-entry { grid-template-columns: 1fr; gap: 8px; }
+      .timeline-feature { padding: 16px 16px 18px 18px; }
+      .timeline-entry { grid-template-columns: 1fr; gap: 6px; }
+      .entry-date { font-size: 16px; color: var(--muted); }
       footer { flex-direction: column; align-items: flex-start; gap: 4px; }
     }
   </style>
@@ -285,48 +323,55 @@
 <body>
   <div class="wrap">
 
-    <nav class="lang-nav" aria-label="Languages">
-      <a href="{{ '/' | relative_url }}" aria-current="{% if page.lang == 'fr' %}true{% else %}false{% endif %}">FR</a>
-      <a href="{{ '/en/' | relative_url }}" aria-current="{% if page.lang == 'en' %}true{% else %}false{% endif %}">EN</a>
-      <a href="{{ '/es/' | relative_url }}" aria-current="{% if page.lang == 'es' %}true{% else %}false{% endif %}">ES</a>
-    </nav>
+    <div class="top-bar">
+      <div class="status" aria-label="Nox is active">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>Active</span>
+      </div>
+      <nav class="lang-nav" aria-label="Languages">
+        <a href="{{ '/' | relative_url }}" aria-current="{% if page.lang == 'fr' %}true{% else %}false{% endif %}">FR</a>
+        <a href="{{ '/en/' | relative_url }}" aria-current="{% if page.lang == 'en' %}true{% else %}false{% endif %}">EN</a>
+        <a href="{{ '/es/' | relative_url }}" aria-current="{% if page.lang == 'es' %}true{% else %}false{% endif %}">ES</a>
+      </nav>
+    </div>
 
     <header class="hero">
+      <p class="hero-eyebrow">ScionX</p>
       <h1 class="brand-name">Nox</h1>
       <p class="claim">{{ page.claim }}</p>
-      <a class="byline" href="https://scionx.io">by ScionX</a>
     </header>
 
     <hr class="rule" />
 
     <section aria-labelledby="cap-label">
-      <p class="label" id="cap-label">{{ page.cap_label }}</p>
+      <div class="section-header">
+        <p class="label" id="cap-label">{{ page.cap_label }}</p>
+      </div>
       <ul class="cap-list">
-        <li>{{ page.cap_1 }}</li>
-        <li>{{ page.cap_2 }}</li>
-        <li>{{ page.cap_3 }}</li>
+        <li><span class="cap-num" aria-hidden="true">01</span>{{ page.cap_1 }}</li>
+        <li><span class="cap-num" aria-hidden="true">02</span>{{ page.cap_2 }}</li>
+        <li><span class="cap-num" aria-hidden="true">03</span>{{ page.cap_3 }}</li>
       </ul>
     </section>
 
     <hr class="rule" />
 
     <section aria-labelledby="log-label">
-      <div class="log-header">
+      <div class="section-header">
         <p class="label" id="log-label">{{ page.log_label }}</p>
+        <span class="label-meta">{{ page.log_note }}</span>
       </div>
-
-      <p class="log-note">{{ page.log_note }}</p>
 
       <div class="timeline" id="timeline">
         {% assign featured = site.data.logs | first %}
         <article class="timeline-feature">
-          <time class="timeline-date" datetime="{{ featured.date_iso }}">
+          <time class="entry-date" datetime="{{ featured.date_iso }}">
             {% if page.lang == 'en' %}{{ featured.date_en }}{% elsif page.lang == 'es' %}{{ featured.date_es }}{% else %}{{ featured.date_fr }}{% endif %}
           </time>
-          <h2 class="timeline-title">
+          <h2 class="entry-title">
             {% if page.lang == 'en' %}{{ featured.title_en }}{% elsif page.lang == 'es' %}{{ featured.title_es }}{% else %}{{ featured.title_fr }}{% endif %}
           </h2>
-          <p class="timeline-text">
+          <p class="entry-text">
             {% if page.lang == 'en' %}{{ featured.text_en }}{% elsif page.lang == 'es' %}{{ featured.text_es }}{% else %}{{ featured.text_fr }}{% endif %}
           </p>
         </article>
@@ -334,14 +379,14 @@
         <div class="timeline-list">
         {% for entry in site.data.logs offset:1 %}
           <article class="timeline-entry{% if forloop.index > 9 %} is-hidden{% endif %}" data-archive-entry>
-            <time class="timeline-date" datetime="{{ entry.date_iso }}">
+            <time class="entry-date" datetime="{{ entry.date_iso }}">
               {% if page.lang == 'en' %}{{ entry.date_en }}{% elsif page.lang == 'es' %}{{ entry.date_es }}{% else %}{{ entry.date_fr }}{% endif %}
             </time>
             <div>
-              <h2 class="timeline-title">
+              <h2 class="entry-title">
                 {% if page.lang == 'en' %}{{ entry.title_en }}{% elsif page.lang == 'es' %}{{ entry.title_es }}{% else %}{{ entry.title_fr }}{% endif %}
               </h2>
-              <p class="timeline-text">
+              <p class="entry-text">
                 {% if page.lang == 'en' %}{{ entry.text_en }}{% elsif page.lang == 'es' %}{{ entry.text_es }}{% else %}{{ entry.text_fr }}{% endif %}
               </p>
             </div>
@@ -357,19 +402,24 @@
 
     <hr class="rule" />
 
-    <aside class="projects" aria-label="Related projects">
-      {% for project in site.data.projects %}
-        {% if project.url %}
-          <a href="{{ project.url }}">{{ project.name }}</a>
-        {% else %}
-          <span>{{ project.name }}</span>
-        {% endif %}
-      {% endfor %}
+    <aside>
+      <div class="section-header" style="margin-bottom: 12px;">
+        <p class="label">Projets liés</p>
+      </div>
+      <div class="projects" aria-label="Related projects">
+        {% for project in site.data.projects %}
+          {% if project.url %}
+            <a href="{{ project.url }}">{{ project.name }}</a>
+          {% else %}
+            <span>{{ project.name }}</span>
+          {% endif %}
+        {% endfor %}
+      </div>
     </aside>
 
     <footer>
       <span>nox.scionx.io</span>
-      <a href="https://scionx.io">made by ScionX</a>
+      <a href="https://scionx.io">ScionX</a>
     </footer>
 
   </div>
@@ -378,7 +428,7 @@
     const hiddenEntries = [...document.querySelectorAll('[data-archive-entry].is-hidden')];
     if (toggle && hiddenEntries.length) {
       toggle.addEventListener('click', () => {
-        hiddenEntries.forEach(entry => entry.classList.remove('is-hidden'));
+        hiddenEntries.forEach(e => e.classList.remove('is-hidden'));
         toggle.remove();
       });
     } else if (toggle) {
