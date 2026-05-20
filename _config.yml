@@ -1,6 +1,18 @@
 title: Nox
+description: "Nox est le secrétaire IA de Bolo — il gère les messages, le suivi de projets, les relances et les tâches du quotidien."
 url: "https://nox.scionx.io"
 baseurl: ""
+author:
+  name: ScionX
+  url: https://scionx.io
+
+twitter:
+  username: scionx
+
+social:
+  name: Nox by ScionX
+  links:
+    - https://scionx.io
 
 languages: ["fr", "en", "es"]
 default_lang: "fr"
@@ -9,6 +21,8 @@ parallel_localization: false
 
 plugins:
   - jekyll-polyglot
+  - jekyll-seo-tag
+  - jekyll-sitemap
 
 exclude:
   - Gemfile
