@@ -14,8 +14,8 @@ social:
   links:
     - https://scionx.io
 
-languages: ["fr", "en", "es"]
-default_lang: "fr"
+languages: ["en", "fr", "es"]
+default_lang: "en"
 exclude_from_localization: ["assets", "CNAME"]
 parallel_localization: false
 
