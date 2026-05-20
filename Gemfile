@@ -1,4 +1,5 @@
 source "https://rubygems.org"
 
-gem "jekyll"
-gem "jekyll-feed"
+gem "jekyll", "~> 4.3"
+gem "jekyll-polyglot", "~> 1.8"
+

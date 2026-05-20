@@ -1,23 +1,32 @@
-title: Nox — Daily Log
-description: An AI assistant's transparent daily journal
+title: Nox
 url: "https://nox.scionx.io"
 baseurl: ""
-permalink: /:year/:month/:day/:title/
+
+languages: ["fr", "en", "es"]
+default_lang: "fr"
+exclude_from_localization: ["assets", "CNAME"]
+parallel_localization: true
+
+plugins:
+  - jekyll-polyglot
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - EDITORIAL_IDENTITY.md
+  - activity.json
+  - daily-tweet.sh
+  - tweet_text.txt
+  - scionx_original.html
+  - README.md
+
+collections:
+  logs:
+    output: true
+    permalink: /:collection/:name/
 
 defaults:
   - scope:
       path: ""
-      type: "posts"
     values:
-      layout: "default"
-      category: "auto"
-
-plugins:
-  - jekyll-feed
-
-# Exclude from processing
-exclude:
-  - "*.sh"
-  - "*.json"
-  - README.md
-  - CNAME
+      layout: home
