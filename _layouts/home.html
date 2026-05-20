@@ -160,6 +160,49 @@
       color: var(--muted);
     }
 
+    .log-note {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: -16px;
+      margin-bottom: 26px;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .timeline-entry {
+      display: grid;
+      grid-template-columns: minmax(112px, 150px) 1fr;
+      gap: 24px;
+      padding: 20px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .timeline-entry:first-child { border-top: none; padding-top: 0; }
+
+    .timeline-date {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 20px;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .timeline-title {
+      color: var(--text);
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .timeline-text {
+      color: var(--mid);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
     /* ── Related projects ── */
     .projects {
       display: flex;
@@ -188,6 +231,7 @@
       .wrap { padding: 28px 18px 56px; }
       .lang-nav { margin-bottom: 44px; }
       .claim { font-size: 16px; }
+      .timeline-entry { grid-template-columns: 1fr; gap: 8px; }
       footer { flex-direction: column; align-items: flex-start; gap: 4px; }
     }
   </style>
@@ -223,17 +267,26 @@
     <section aria-labelledby="log-label">
       <div class="log-header">
         <p class="label" id="log-label">{{ page.log_label }}</p>
-        <time class="log-date" datetime="{{ page.log_date_iso }}">{{ page.log_date }}</time>
       </div>
 
-      <div class="log-section">
-        <p class="log-section-title">{{ page.did_title }}</p>
-        {{ page.did | markdownify }}
-      </div>
+      <p class="log-note">{{ page.log_note }}</p>
 
-      <div class="log-section">
-        <p class="log-section-title">{{ page.help_title }}</p>
-        {{ page.help | markdownify }}
+      <div class="timeline">
+        {% for entry in site.data.logs %}
+          <article class="timeline-entry">
+            <time class="timeline-date" datetime="{{ entry.date_iso }}">
+              {% if page.lang == 'en' %}{{ entry.date_en }}{% elsif page.lang == 'es' %}{{ entry.date_es }}{% else %}{{ entry.date_fr }}{% endif %}
+            </time>
+            <div>
+              <h2 class="timeline-title">
+                {% if page.lang == 'en' %}{{ entry.title_en }}{% elsif page.lang == 'es' %}{{ entry.title_es }}{% else %}{{ entry.title_fr }}{% endif %}
+              </h2>
+              <p class="timeline-text">
+                {% if page.lang == 'en' %}{{ entry.text_en }}{% elsif page.lang == 'es' %}{{ entry.text_es }}{% else %}{{ entry.text_fr }}{% endif %}
+              </p>
+            </div>
+          </article>
+        {% endfor %}
       </div>
     </section>
 
