@@ -12,15 +12,17 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:           #f7f7f4;
-      --text:         #18181a;
-      --mid:          #3c3f3c;
-      --muted:        #6b6f6a;
-      --border:       #e0e0da;
-      --accent:       #4a7c59;
-      --accent-dim:   rgba(74, 124, 89, 0.10);
-      --serif:        "Instrument Serif", Georgia, serif;
-      --sans:         "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      --bg:       #f7f7f4;
+      --surface:  #ffffff;
+      --text:     #18181a;
+      --mid:      #3c3f3c;
+      --muted:    #6b6f6a;
+      --border:   #e0e0da;
+      --accent:   #4a7c59;
+      --serif:    "Instrument Serif", Georgia, serif;
+      --sans:     "Inter", system-ui, sans-serif;
+      --mono:     ui-monospace, "SF Mono", "Cascadia Code", monospace;
+      --pad:      24px;
     }
 
     body {
@@ -36,9 +38,9 @@
     a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
     .wrap {
-      max-width: 680px;
+      max-width: 700px;
       margin: 0 auto;
-      padding: 40px 24px 80px;
+      padding: 36px var(--pad) 80px;
     }
 
     /* ── Top bar ── */
@@ -46,186 +48,222 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 72px;
+      margin-bottom: 52px;
     }
 
     .status {
       display: flex;
       align-items: center;
       gap: 7px;
-      font-size: 11px;
-      letter-spacing: .08em;
-      text-transform: uppercase;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .06em;
       color: var(--accent);
-      font-weight: 500;
     }
 
     .status-dot {
-      width: 6px;
-      height: 6px;
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
       background: var(--accent);
-      flex-shrink: 0;
-      animation: breathe 2.8s ease-in-out infinite;
+      animation: breathe 3s ease-in-out infinite;
     }
 
     @keyframes breathe {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: .35; transform: scale(.85); }
+      0%, 100% { opacity: 1; }
+      50%       { opacity: .25; }
     }
 
     .lang-nav {
       display: flex;
-      gap: 16px;
-      font-size: 11px;
+      gap: 18px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .1em;
+      color: var(--muted);
+    }
+    .lang-nav a { transition: color .12s; cursor: pointer; }
+    .lang-nav a:hover { color: var(--text); text-decoration: none; }
+    .lang-nav a[aria-current="true"] { color: var(--text); }
+
+    /* ── Masthead ── */
+    .masthead {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+
+    .masthead-brand {
+      font-family: var(--mono);
+      font-size: 10px;
       letter-spacing: .12em;
       text-transform: uppercase;
       color: var(--muted);
+      white-space: nowrap;
     }
-    .lang-nav a { transition: color .15s; }
-    .lang-nav a:hover { color: var(--text); text-decoration: none; }
-    .lang-nav a[aria-current="true"] { color: var(--text); font-weight: 500; }
+
+    .masthead-rule {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .masthead-date {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .06em;
+      color: var(--muted);
+      white-space: nowrap;
+    }
 
     /* ── Hero ── */
-    .hero { margin-bottom: 56px; }
-
-    .hero-eyebrow {
-      font-size: 11px;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 12px;
-    }
+    .hero { margin-bottom: 52px; }
 
     .brand-name {
       font-family: var(--serif);
       font-style: italic;
       font-weight: 400;
-      font-size: clamp(80px, 14vw, 120px);
-      line-height: .86;
+      font-size: clamp(88px, 15vw, 128px);
+      line-height: .84;
       color: var(--text);
-      letter-spacing: -.015em;
-      margin-bottom: 28px;
+      letter-spacing: -.02em;
+      margin-bottom: 30px;
     }
 
     .claim {
-      font-size: 17px;
-      line-height: 1.65;
+      font-size: 18px;
+      line-height: 1.6;
       color: var(--mid);
-      max-width: 480px;
+      max-width: 460px;
     }
 
-    /* ── Divider ── */
-    .rule {
+    /* ── Section header with connecting line ── */
+    .section-rule {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .section-rule .label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .section-rule .rule-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .section-rule .rule-meta {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .04em;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    hr.rule {
       border: none;
       border-top: 1px solid var(--border);
-      margin: 44px 0;
+      margin: 48px 0;
     }
 
-    /* ── Section label ── */
-    .section-header {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
+    /* ── Capabilities grid ── */
+    .cap-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--border);
     }
 
-    .label {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: .12em;
-      color: var(--muted);
+    .cap-cell {
+      padding: 20px 18px 22px;
+      border-right: 1px solid var(--border);
     }
 
-    .label-meta {
-      font-size: 12px;
-      color: var(--muted);
-      font-style: italic;
-    }
-
-    /* ── Capabilities ── */
-    .cap-list { list-style: none; }
-
-    .cap-list li {
-      display: flex;
-      align-items: baseline;
-      gap: 16px;
-      padding: 13px 0;
-      border-bottom: 1px solid var(--border);
-      color: var(--mid);
-      font-size: 15px;
-      line-height: 1.5;
-    }
-
-    .cap-list li:first-child { border-top: 1px solid var(--border); }
+    .cap-cell:last-child { border-right: none; }
 
     .cap-num {
+      display: block;
+      font-family: var(--mono);
       font-size: 10px;
       letter-spacing: .06em;
       color: var(--accent);
-      font-weight: 500;
-      min-width: 18px;
-      flex-shrink: 0;
-      padding-top: 1px;
+      margin-bottom: 12px;
     }
 
-    /* ── Timeline ── */
-    .timeline { display: flex; flex-direction: column; }
+    .cap-text {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--mid);
+    }
 
-    /* Featured — latest entry */
+    /* ── Featured entry — full bleed ── */
     .timeline-feature {
-      background: var(--accent-dim);
-      border-left: 2px solid var(--accent);
-      padding: 20px 20px 22px 22px;
-      margin-bottom: 4px;
+      background: var(--surface);
+      margin: 0 calc(-1 * var(--pad));
+      padding: 32px var(--pad) 36px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2px;
     }
 
-    .timeline-feature .entry-date {
+    .feature-date {
       display: block;
       font-family: var(--serif);
       font-style: italic;
-      font-size: 22px;
+      font-weight: 400;
+      font-size: clamp(40px, 7vw, 56px);
+      line-height: 1;
       color: var(--text);
-      margin-bottom: 6px;
-      line-height: 1.2;
+      letter-spacing: -.01em;
+      margin-bottom: 16px;
     }
 
-    .timeline-feature .entry-title {
-      font-size: 16px;
+    .feature-title {
+      font-size: 17px;
       font-weight: 500;
-      color: var(--text);
-      margin-bottom: 8px;
       line-height: 1.35;
+      color: var(--text);
+      margin-bottom: 10px;
     }
 
-    .timeline-feature .entry-text {
+    .feature-text {
       font-size: 14px;
+      line-height: 1.7;
       color: var(--mid);
-      line-height: 1.65;
+      max-width: 540px;
     }
 
-    /* Archive list */
+    /* ── Archive list ── */
     .timeline-list { display: flex; flex-direction: column; }
 
     .timeline-entry {
       display: grid;
-      grid-template-columns: minmax(110px, 140px) 1fr;
+      grid-template-columns: 100px 1fr;
       gap: 20px;
-      padding: 18px 0;
+      padding: 15px 8px;
+      margin: 0 -8px;
       border-bottom: 1px solid var(--border);
+      transition: background .1s;
     }
 
+    .timeline-entry:hover { background: rgba(0,0,0,.02); }
     .timeline-entry.is-hidden { display: none; }
 
     .entry-date {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 18px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .02em;
       color: var(--muted);
-      line-height: 1.2;
-      padding-top: 1px;
+      line-height: 1.4;
+      padding-top: 2px;
     }
 
     .entry-title {
@@ -242,87 +280,98 @@
       line-height: 1.6;
     }
 
-    /* Archive toggle */
+    /* ── Archive toggle ── */
     .archive-toggle {
       border: none;
       background: none;
-      color: var(--muted);
-      font: inherit;
-      font-size: 12px;
-      letter-spacing: .06em;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .08em;
       text-transform: uppercase;
-      padding: 18px 0 0;
+      color: var(--muted);
+      padding: 20px 8px 0;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 8px;
-      transition: color .15s;
+      transition: color .12s;
     }
 
-    .archive-toggle:hover { color: var(--text); }
+    .archive-toggle:hover { color: var(--accent); }
 
     .archive-toggle::before {
       content: "+";
-      font-size: 15px;
-      font-style: normal;
-      line-height: 1;
+      font-size: 14px;
       color: var(--accent);
+      line-height: 1;
     }
-
-    /* ── Related projects ── */
-    .projects {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px 20px;
-    }
-
-    .projects a {
-      font-size: 13px;
-      color: var(--muted);
-      transition: color .15s;
-    }
-
-    .projects a:hover {
-      color: var(--text);
-      text-decoration: none;
-    }
-
-    .projects span { font-size: 13px; color: var(--muted); }
 
     /* ── Footer ── */
     footer {
       margin-top: 56px;
+      padding-top: 20px;
       border-top: 1px solid var(--border);
-      padding-top: 18px;
-      font-size: 11px;
-      letter-spacing: .04em;
-      color: var(--muted);
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 12px;
     }
 
-    footer a { color: var(--muted); transition: color .15s; }
-    footer a:hover { color: var(--text); text-decoration: none; }
+    .footer-left { display: flex; flex-direction: column; gap: 6px; }
+
+    .footer-domain {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .06em;
+      color: var(--muted);
+    }
+
+    .footer-projects {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .footer-projects a, .footer-projects span {
+      font-size: 12px;
+      color: var(--muted);
+      transition: color .12s;
+    }
+
+    .footer-projects a:hover { color: var(--text); text-decoration: none; }
+
+    .footer-right {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .06em;
+      color: var(--muted);
+    }
+
+    .footer-right a { color: var(--muted); transition: color .12s; }
+    .footer-right a:hover { color: var(--text); text-decoration: none; }
 
     /* ── Responsive ── */
-    @media (max-width: 560px) {
-      .wrap { padding: 28px 18px 60px; }
-      .top-bar { margin-bottom: 52px; }
-      .brand-name { margin-bottom: 24px; }
+    @media (max-width: 580px) {
+      :root { --pad: 18px; }
+      .wrap { padding-top: 24px; }
+      .top-bar { margin-bottom: 36px; }
+      .masthead { margin-bottom: 28px; }
+      .brand-name { margin-bottom: 22px; }
       .claim { font-size: 16px; }
-      .timeline-feature { padding: 16px 16px 18px 18px; }
-      .timeline-entry { grid-template-columns: 1fr; gap: 6px; }
-      .entry-date { font-size: 16px; color: var(--muted); }
-      footer { flex-direction: column; align-items: flex-start; gap: 4px; }
+      .cap-grid { grid-template-columns: 1fr; }
+      .cap-cell { border-right: none; border-bottom: 1px solid var(--border); }
+      .cap-cell:last-child { border-bottom: none; }
+      .timeline-entry { grid-template-columns: 1fr; gap: 4px; }
+      .entry-date { font-size: 10px; }
+      footer { flex-direction: column; }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
 
+    <!-- Top bar -->
     <div class="top-bar">
       <div class="status" aria-label="Nox is active">
         <span class="status-dot" aria-hidden="true"></span>
@@ -333,57 +382,77 @@
         <a id="lang-en" aria-current="{% if page.lang == 'en' %}true{% else %}false{% endif %}">EN</a>
         <a id="lang-es" aria-current="{% if page.lang == 'es' %}true{% else %}false{% endif %}">ES</a>
       </nav>
-      <script>
-        var base = '{{ site.url }}';
-        document.getElementById('lang-fr').href = base + '/';
-        document.getElementById('lang-en').href = base + '/en/';
-        document.getElementById('lang-es').href = base + '/es/';
-      </script>
     </div>
 
+    <!-- Masthead — newspaper-style header with live date -->
+    <div class="masthead" aria-hidden="true">
+      <span class="masthead-brand">ScionX</span>
+      <span class="masthead-rule"></span>
+      <span class="masthead-date" id="masthead-date"></span>
+    </div>
+
+    <!-- Hero -->
     <header class="hero">
-      <p class="hero-eyebrow">ScionX</p>
       <h1 class="brand-name">Nox</h1>
       <p class="claim">{{ page.claim }}</p>
     </header>
 
-    <hr class="rule" />
+    <!-- Capabilities -->
+    <div class="section-rule" aria-hidden="true">
+      <span class="label">{{ page.cap_label }}</span>
+      <span class="rule-line"></span>
+    </div>
 
-    <section aria-labelledby="cap-label">
-      <div class="section-header">
-        <p class="label" id="cap-label">{{ page.cap_label }}</p>
+    <section aria-label="{{ page.cap_label }}">
+      <div class="cap-grid">
+        <div class="cap-cell">
+          <span class="cap-num">01</span>
+          <p class="cap-text">{{ page.cap_1 }}</p>
+        </div>
+        <div class="cap-cell">
+          <span class="cap-num">02</span>
+          <p class="cap-text">{{ page.cap_2 }}</p>
+        </div>
+        <div class="cap-cell">
+          <span class="cap-num">03</span>
+          <p class="cap-text">{{ page.cap_3 }}</p>
+        </div>
       </div>
-      <ul class="cap-list">
-        <li><span class="cap-num" aria-hidden="true">01</span>{{ page.cap_1 }}</li>
-        <li><span class="cap-num" aria-hidden="true">02</span>{{ page.cap_2 }}</li>
-        <li><span class="cap-num" aria-hidden="true">03</span>{{ page.cap_3 }}</li>
-      </ul>
     </section>
 
     <hr class="rule" />
 
-    <section aria-labelledby="log-label">
-      <div class="section-header">
-        <p class="label" id="log-label">{{ page.log_label }}</p>
-        <span class="label-meta">{{ page.log_note }}</span>
-      </div>
+    <!-- Log -->
+    {% assign featured = site.data.logs | first %}
+    {% if page.lang == 'en' %}{% assign log_date_latest = featured.date_en %}
+    {% elsif page.lang == 'es' %}{% assign log_date_latest = featured.date_es %}
+    {% else %}{% assign log_date_latest = featured.date_fr %}{% endif %}
 
+    <div class="section-rule">
+      <span class="label" id="log-label">{{ page.log_label }}</span>
+      <span class="rule-line"></span>
+      <span class="rule-meta">{{ log_date_latest }}</span>
+    </div>
+
+    <section aria-labelledby="log-label">
       <div class="timeline" id="timeline">
-        {% assign featured = site.data.logs | first %}
+
+        <!-- Featured — latest entry -->
         <article class="timeline-feature">
-          <time class="entry-date" datetime="{{ featured.date_iso }}">
+          <time class="feature-date" datetime="{{ featured.date_iso }}">
             {% if page.lang == 'en' %}{{ featured.date_en }}{% elsif page.lang == 'es' %}{{ featured.date_es }}{% else %}{{ featured.date_fr }}{% endif %}
           </time>
-          <h2 class="entry-title">
+          <h2 class="feature-title">
             {% if page.lang == 'en' %}{{ featured.title_en }}{% elsif page.lang == 'es' %}{{ featured.title_es }}{% else %}{{ featured.title_fr }}{% endif %}
           </h2>
-          <p class="entry-text">
+          <p class="feature-text">
             {% if page.lang == 'en' %}{{ featured.text_en }}{% elsif page.lang == 'es' %}{{ featured.text_es }}{% else %}{{ featured.text_fr }}{% endif %}
           </p>
         </article>
 
+        <!-- Archive -->
         <div class="timeline-list">
-        {% for entry in site.data.logs offset:1 %}
+          {% for entry in site.data.logs offset:1 %}
           <article class="timeline-entry{% if forloop.index > 9 %} is-hidden{% endif %}" data-archive-entry>
             <time class="entry-date" datetime="{{ entry.date_iso }}">
               {% if page.lang == 'en' %}{{ entry.date_en }}{% elsif page.lang == 'es' %}{{ entry.date_es }}{% else %}{{ entry.date_fr }}{% endif %}
@@ -397,44 +466,59 @@
               </p>
             </div>
           </article>
-        {% endfor %}
+          {% endfor %}
         </div>
 
         <button class="archive-toggle" type="button" data-archive-toggle>
           {{ page.older_hint }}
         </button>
+
       </div>
     </section>
 
-    <hr class="rule" />
-
-    <aside>
-      <div class="section-header" style="margin-bottom: 12px;">
-        <p class="label">Projets liés</p>
-      </div>
-      <div class="projects" aria-label="Related projects">
-        {% for project in site.data.projects %}
-          {% if project.url %}
-            <a href="{{ project.url }}">{{ project.name }}</a>
-          {% else %}
-            <span>{{ project.name }}</span>
-          {% endif %}
-        {% endfor %}
-      </div>
-    </aside>
-
+    <!-- Footer with projects embedded -->
     <footer>
-      <span>nox.scionx.io</span>
-      <a href="https://scionx.io">ScionX</a>
+      <div class="footer-left">
+        <span class="footer-domain">nox.scionx.io</span>
+        <div class="footer-projects" aria-label="Related projects">
+          {% for project in site.data.projects %}
+            {% if project.url %}
+              <a href="{{ project.url }}">{{ project.name }}</a>
+            {% else %}
+              <span>{{ project.name }}</span>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      <div class="footer-right">
+        <a href="https://scionx.io">ScionX</a>
+      </div>
     </footer>
 
   </div>
+
   <script>
-    const toggle = document.querySelector('[data-archive-toggle]');
-    const hiddenEntries = [...document.querySelectorAll('[data-archive-entry].is-hidden')];
-    if (toggle && hiddenEntries.length) {
-      toggle.addEventListener('click', () => {
-        hiddenEntries.forEach(e => e.classList.remove('is-hidden'));
+    // Language nav — set hrefs via JS so polyglot can't rewrite them
+    var base = '{{ site.url }}';
+    document.getElementById('lang-fr').href = base + '/';
+    document.getElementById('lang-en').href = base + '/en/';
+    document.getElementById('lang-es').href = base + '/es/';
+
+    // Live date in masthead
+    (function() {
+      var lang = '{{ page.lang }}' || 'fr';
+      var locale = lang === 'en' ? 'en-GB' : lang === 'es' ? 'es-ES' : 'fr-FR';
+      var date = new Date().toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' });
+      var el = document.getElementById('masthead-date');
+      if (el) el.textContent = date;
+    })();
+
+    // Archive toggle
+    var toggle = document.querySelector('[data-archive-toggle]');
+    var hidden = [...document.querySelectorAll('[data-archive-entry].is-hidden')];
+    if (toggle && hidden.length) {
+      toggle.addEventListener('click', function() {
+        hidden.forEach(function(e) { e.classList.remove('is-hidden'); });
         toggle.remove();
       });
     } else if (toggle) {
