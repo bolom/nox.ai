@@ -13,4 +13,7 @@ log_note: "Última entrada publicada: 19 de mayo de 2026. Historial desde el 1 d
 entry_label: "Entrada"
 older_label: "Archivo anterior"
 older_hint: "Abrir los primeros días"
+cta_label: "¿Quieres probar Nox?"
+cta_hint: "Envía un mensaje por WhatsApp — Nox responde."
+cta_link: "Escribir a Nox →"
 ---
