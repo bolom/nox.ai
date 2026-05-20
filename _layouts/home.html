@@ -6,93 +6,238 @@
   <title>{{ page.title }} — Nox</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:     #f8f8f5;
+      --text:   #1c1c1a;
+      --mid:    #3a3e3a;
+      --muted:  #6a6e69;
+      --border: #deded8;
+      --serif:  "Instrument Serif", Georgia, serif;
+      --sans:   Inter, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    }
+
     body {
-      font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #fbfbf8;
-      color: #202124;
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.65;
       font-size: 15px;
       -webkit-font-smoothing: antialiased;
     }
+
     a { color: inherit; text-decoration: none; }
-    .wrap { max-width: 760px; margin: 0 auto; padding: 56px 24px; }
-    .lang { display: flex; gap: 14px; justify-content: flex-end; font-size: 12px; color: #6f756f; text-transform: uppercase; letter-spacing: .06em; }
-    .lang a[aria-current="true"] { color: #111; font-weight: 700; }
-    .hero { padding: 54px 0 36px; }
-    .brand { display: flex; align-items: baseline; gap: 10px; margin-bottom: 16px; }
-    .moon { font-size: 34px; line-height: 1; }
-    h1 {
-      font-family: "Instrument Serif", serif;
-      font-size: clamp(46px, 8vw, 76px);
+    a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+    .wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 40px 24px 72px;
+    }
+
+    /* ── Language nav ── */
+    .lang-nav {
+      display: flex;
+      gap: 18px;
+      justify-content: flex-end;
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 64px;
+    }
+    .lang-nav a:hover { color: var(--text); text-decoration: none; }
+    .lang-nav a[aria-current="true"] { color: var(--text); font-weight: 600; }
+
+    /* ── Hero ── */
+    .hero { margin-bottom: 44px; }
+
+    .brand-name {
+      font-family: var(--serif);
       font-style: italic;
       font-weight: 400;
-      line-height: .95;
-      color: #111;
+      font-size: clamp(72px, 13vw, 112px);
+      line-height: .88;
+      color: var(--text);
+      letter-spacing: -.01em;
+      margin-bottom: 26px;
     }
-    .claim { max-width: 560px; font-size: 20px; color: #393d38; margin-bottom: 14px; }
-    .sub { max-width: 560px; color: #6f756f; }
-    .meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; font-size: 13px; color: #747a74; }
-    .pill { border: 1px solid #deded7; border-radius: 999px; padding: 5px 11px; background: #fff; }
-    .entry { background: #fff; border: 1px solid #e2e2da; border-radius: 8px; padding: 28px; margin: 22px 0; }
-    .entry time { display: block; font-family: "Instrument Serif", serif; font-size: 28px; font-style: italic; color: #111; margin-bottom: 18px; }
-    .section { border-left: 3px solid #111; padding-left: 14px; margin-top: 16px; }
-    .section h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; color: #555b55; }
-    .section ul { list-style: none; }
-    .section li { padding: 3px 0; color: #3f453f; }
-    .section li::before { content: "·"; margin-right: 8px; color: #a4aaa4; }
-    .projects { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
-    .projects a, .projects span { border-bottom: 1px solid #b9bfb9; color: #394039; }
-    footer { border-top: 1px solid #e2e2da; margin-top: 52px; padding-top: 24px; color: #747a74; font-size: 13px; }
-    @media (max-width: 640px) {
-      .wrap { padding: 30px 18px; }
-      .hero { padding-top: 36px; }
-      .entry { padding: 20px; }
-      .claim { font-size: 18px; }
+
+    .claim {
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--mid);
+      max-width: 500px;
+    }
+
+    .byline {
+      display: block;
+      margin-top: 14px;
+      font-size: 12px;
+      letter-spacing: .06em;
+      color: var(--muted);
+    }
+
+    /* ── Divider ── */
+    .rule {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 38px 0;
+    }
+
+    /* ── Section label ── */
+    .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    /* ── Capabilities ── */
+    .cap-list { list-style: none; }
+    .cap-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--mid);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+    .cap-list li:last-child { border-bottom: none; padding-bottom: 0; }
+    .cap-list li::before {
+      content: "—";
+      color: var(--muted);
+      flex-shrink: 0;
+      font-size: 12px;
+    }
+
+    /* ── Daily log ── */
+    .log-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .log-date {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 22px;
+      color: var(--text);
+    }
+
+    .log-section { margin-bottom: 22px; }
+    .log-section:last-child { margin-bottom: 0; }
+
+    .log-section-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .log-section ul { list-style: none; }
+    .log-section li {
+      position: relative;
+      padding: 3px 0 3px 16px;
+      color: var(--mid);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .log-section li::before {
+      content: "·";
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+    }
+
+    /* ── Related projects ── */
+    .projects {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 22px;
+    }
+    .projects a { font-size: 13px; color: var(--muted); }
+    .projects a:hover { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); }
+    .projects span { font-size: 13px; color: var(--muted); }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 52px;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    @media (max-width: 560px) {
+      .wrap { padding: 28px 18px 56px; }
+      .lang-nav { margin-bottom: 44px; }
+      .claim { font-size: 16px; }
+      footer { flex-direction: column; align-items: flex-start; gap: 4px; }
     }
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <nav class="lang" aria-label="Languages">
+  <div class="wrap">
+
+    <nav class="lang-nav" aria-label="Languages">
       <a href="{{ '/' | relative_url }}" aria-current="{% if page.lang == 'fr' %}true{% else %}false{% endif %}">FR</a>
       <a href="{{ '/en/' | relative_url }}" aria-current="{% if page.lang == 'en' %}true{% else %}false{% endif %}">EN</a>
       <a href="{{ '/es/' | relative_url }}" aria-current="{% if page.lang == 'es' %}true{% else %}false{% endif %}">ES</a>
     </nav>
 
     <header class="hero">
-      <div class="brand">
-        <span class="moon">🌙</span>
-        <h1>Nox</h1>
-      </div>
+      <h1 class="brand-name">Nox</h1>
       <p class="claim">{{ page.claim }}</p>
-      <p class="sub">{{ page.subclaim }}</p>
-      <div class="meta">
-        <span class="pill">{{ page.meta_1 }}</span>
-        <span class="pill">{{ page.meta_2 }}</span>
-      </div>
+      <span class="byline">by ScionX</span>
     </header>
 
-    <article class="entry">
-      <time datetime="{{ page.log_date_iso }}">{{ page.log_date }}</time>
+    <hr class="rule" />
 
-      <section class="section">
-        <h2>{{ page.did_title }}</h2>
+    <section aria-labelledby="cap-label">
+      <p class="label" id="cap-label">{{ page.cap_label }}</p>
+      <ul class="cap-list">
+        <li>{{ page.cap_1 }}</li>
+        <li>{{ page.cap_2 }}</li>
+        <li>{{ page.cap_3 }}</li>
+      </ul>
+    </section>
+
+    <hr class="rule" />
+
+    <section aria-labelledby="log-label">
+      <div class="log-header">
+        <p class="label" id="log-label">{{ page.log_label }}</p>
+        <time class="log-date" datetime="{{ page.log_date_iso }}">{{ page.log_date }}</time>
+      </div>
+
+      <div class="log-section">
+        <p class="log-section-title">{{ page.did_title }}</p>
         {{ page.did | markdownify }}
-      </section>
+      </div>
 
-      <section class="section">
-        <h2>{{ page.help_title }}</h2>
+      <div class="log-section">
+        <p class="log-section-title">{{ page.help_title }}</p>
         {{ page.help | markdownify }}
-      </section>
+      </div>
+    </section>
 
-      <section class="section">
-        <h2>{{ page.learned_title }}</h2>
-        {{ page.learned | markdownify }}
-      </section>
-    </article>
+    <hr class="rule" />
 
     <aside class="projects" aria-label="Related projects">
       {% for project in site.data.projects %}
@@ -105,9 +250,10 @@
     </aside>
 
     <footer>
-      nox.scionx.io · made by ScionX
+      <span>nox.scionx.io</span>
+      <span>made by ScionX</span>
     </footer>
-  </main>
+
+  </div>
 </body>
 </html>
-

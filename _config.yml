@@ -5,7 +5,7 @@ baseurl: ""
 languages: ["fr", "en", "es"]
 default_lang: "fr"
 exclude_from_localization: ["assets", "CNAME"]
-parallel_localization: true
+parallel_localization: false
 
 plugins:
   - jekyll-polyglot
