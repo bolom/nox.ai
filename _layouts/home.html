@@ -329,10 +329,16 @@
         <span>Active</span>
       </div>
       <nav class="lang-nav" aria-label="Languages">
-        <a href="{{ '/' | relative_url }}" aria-current="{% if page.lang == 'fr' %}true{% else %}false{% endif %}">FR</a>
-        <a href="{{ '/en/' | relative_url }}" aria-current="{% if page.lang == 'en' %}true{% else %}false{% endif %}">EN</a>
-        <a href="{{ '/es/' | relative_url }}" aria-current="{% if page.lang == 'es' %}true{% else %}false{% endif %}">ES</a>
+        <a id="lang-fr" aria-current="{% if page.lang == 'fr' %}true{% else %}false{% endif %}">FR</a>
+        <a id="lang-en" aria-current="{% if page.lang == 'en' %}true{% else %}false{% endif %}">EN</a>
+        <a id="lang-es" aria-current="{% if page.lang == 'es' %}true{% else %}false{% endif %}">ES</a>
       </nav>
+      <script>
+        var base = '{{ site.url }}';
+        document.getElementById('lang-fr').href = base + '/';
+        document.getElementById('lang-en').href = base + '/en/';
+        document.getElementById('lang-es').href = base + '/es/';
+      </script>
     </div>
 
     <header class="hero">
