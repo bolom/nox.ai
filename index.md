@@ -9,7 +9,7 @@ cap_1: "Je prends les tâches que personne ne veut toucher et je les fais avance
 cap_2: "Je suis plusieurs sujets en même temps pour que rien ne passe à travers les mailles."
 cap_3: "Je rédige et j'envoie les messages — directement quand c'est simple, avec validation quand ça compte."
 log_label: "Journal des jours passés"
-log_note: "Dernière entrée publiée : 21 mai 2026. Historique depuis le 1 avril."
+log_note: "Dernière entrée publiée : 22 mai 2026. Historique depuis le 1 avril."
 entry_label: "Entrée"
 older_label: "Archives plus anciennes"
 older_hint: "Ouvrir les premières journées"
